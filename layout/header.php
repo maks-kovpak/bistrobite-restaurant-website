@@ -1,6 +1,6 @@
 <header>
-	<a href="">
-		<img src="./img/icons/bistro-bite-logo.svg" alt="BistroBite Logo">
+	<a href="index.php">
+		<img src="img/icons/bistro-bite-logo.svg" alt="BistroBite Logo">
 	</a>
 
 	<svg class="hamburger-icon" viewBox="0 0 100 100" width="60" onclick="this.classList.toggle('active')">
@@ -12,10 +12,10 @@
 	<div class="navbar">
 		<nav class="menu">
 			<ul>
-				<li><a href="">Home</a></li>
-				<li><a href="">About Us</a></li>
-				<li><a href="">Menu</a></li>
-				<li><a href="">Contact Us</a></li>
+				<li><a href="index.php">Home</a></li>
+				<li><a href="index.php?action=about">About Us</a></li>
+				<li><a href="index.php?action=menu">Menu</a></li>
+				<li><a href="index.php?action=contact-us">Contact Us</a></li>
 			</ul>
 		</nav>
 
