@@ -56,3 +56,11 @@
 		</div>
 	</div>
 </footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" integrity="sha256-FZsW7H2V5X9TGinSjjwYJ419Xka27I8XPDmWryGlWtw=" crossorigin="anonymous"></script>
+<script src="js/script.js"></script>
+<script src="js/captcha.js" type="module"></script>
+</body>
+
+</html>

@@ -8,6 +8,7 @@
   "prettier.useEditorConfig": false,
   "prettier.useTabs": false,
   "prettier.configPath": ".prettierrc",
+  "intelephense.format.braces": "k&r",
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },

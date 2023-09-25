@@ -1,5 +1,6 @@
 @import url('pages/main.css');
 @import url('pages/about.css');
+@import url('pages/registration.css');
 
 :root {
   --black-color: #000000;
@@ -128,6 +129,10 @@ input,
   font-size: 1rem;
   font-weight: 400;
   line-height: 150%;
+}
+
+a.btn {
+  text-decoration: none;
 }
 
 .search-container {
