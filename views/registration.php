@@ -3,7 +3,7 @@
 function has_error($inputName, $regex, $errorType = "invalid") {
 	if (!isset($_POST[$inputName])) {
 		return "unset";
-	} else if ($_POST[$inputName] == '') {
+	} else if ($_POST[$inputName] == "") {
 		return "error required";
 	} else if (!preg_match($regex, $_POST[$inputName])) {
 		return "error " . $errorType;
@@ -18,7 +18,7 @@ function error_if($firstInput, $secondInput, $errorType = "invalid", $predicate 
 
 	if (!isset($_POST[$firstInput]) || !isset($_POST[$secondInput])) {
 		return "unset";
-	} else if ($_POST[$secondInput] == '') {
+	} else if ($_POST[$secondInput] == "") {
 		return "error required";
 	} else if ($predicate($_POST[$firstInput], $_POST[$secondInput])) {
 		return "error " . $errorType;
@@ -36,10 +36,23 @@ $ERRORS = [
 ];
 
 function get_val($inputName) {
-	return isset($_POST[$inputName]) ? $_POST[$inputName] : '';
+	return isset($_POST[$inputName]) ? $_POST[$inputName] : "";
 }
 
 $formValid = !in_array(true, array_map(fn ($item) => str_starts_with($item, "error") || $item == "unset", $ERRORS));
+
+// Add to the database
+if ($formValid) {
+	require_once("database-model.php");
+
+	$db = new DatabaseModel();
+	$db->use_table("users");
+	$db->create([
+		"login" => get_val("login"),
+		"password" => password_hash(get_val("password"), PASSWORD_BCRYPT),
+		"email" => get_val("email")
+	]);
+}
 
 ?>
 
