@@ -6,6 +6,13 @@ require_once("vendor/autoload.php");
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->load();
 
+// Create database model instance
+require_once("database-model.php");
+$db = new DatabaseModel();
+
+// Start new session
+session_start();
+
 // Layout
 require_once("layout/header.php");
 

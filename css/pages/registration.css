@@ -15,6 +15,14 @@
   object-fit: cover;
 }
 
+.registration-section .form > h2 {
+  margin: 0;
+}
+
+.registration-section .form > p {
+  margin-bottom: 1.5rem;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -91,15 +99,17 @@
   background: var(--white-color);
 }
 
-/* Registration Success */
+/* Success Block */
 
-.registration-success {
+.success-block {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  max-width: 800px;
   gap: 2rem;
-  margin: 5rem 0;
+  margin: 5rem auto;
+  text-align: center;
 }
 
 /* Media Queries */

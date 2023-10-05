@@ -29,3 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
       '<img src="img/icons/filled-star.svg">'.repeat(n) + '<img src="img/icons/star.svg">'.repeat(5 - n);
   });
 });
+
+// Page loader
+document.addEventListener('readystatechange', function () {
+  const state = document.readyState;
+  const loader = document.querySelector('.loader-container');
+
+  if (loader === null) return;
+
+  if (state === 'complete') {
+    document.body.style.overflow = 'initial';
+    loader.style.display = 'none';
+  }
+});

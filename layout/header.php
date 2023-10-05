@@ -24,7 +24,11 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body style="overflow: hidden;">
+	<div class="loader-container">
+		<div class="loader"></div>
+	</div>
+
 	<header>
 		<a href="index.php">
 			<img src="img/icons/bistro-bite-logo.svg" alt="BistroBite Logo">
@@ -50,6 +54,11 @@
 				<input type="search" placeholder="Search">
 				<button type="submit"></button>
 			</form>
-			<a class="btn primary-btn black" href="index.php?action=registration">Sign Up</a>
+
+			<?php if (isset($_SESSION["user-login"])) { ?>
+				<a class="btn primary-btn black" href="index.php?action=logout">Log out</a>
+			<?php } else { ?>
+				<a class="btn primary-btn black" href="index.php?action=login">Log in</a>
+			<?php } ?>
 		</div>
 	</header>

@@ -51,11 +51,8 @@
 		<div id="feedbacks-slider" class="splide">
 			<div class="splide__track">
 				<ul class="splide__list">
-					<?php
-
-					for ($i = 0; $i < 4; $i++) {
-						echo
-						'<li class="splide__slide">
+					<?php for ($i = 0; $i < 4; $i++) { ?>
+						<li class="splide__slide">
 							<div class="feedback-card">
 								<div class="rating" data-rate="5"></div>
 								<q>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare</q>
@@ -104,10 +101,8 @@
 									</div>
 								</div>
 							</div>
-						</li>';
-					}
-
-					?>
+						</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>

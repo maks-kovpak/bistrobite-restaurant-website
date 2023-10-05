@@ -43,9 +43,6 @@ $formValid = !in_array(true, array_map(fn ($item) => str_starts_with($item, "err
 
 // Add to the database
 if ($formValid) {
-	require_once("database-model.php");
-
-	$db = new DatabaseModel();
 	$db->use_table("users");
 	$db->create([
 		"login" => get_val("login"),
@@ -64,7 +61,7 @@ if ($formValid) {
 
 				<div class="field <?= $ERRORS["login"] ?>">
 					<label for="reg-login">Login</label>
-					<input type="text" name="login" id="reg-login" value="<?= get_val("login") ?>">
+					<input type="text" name="login" id="reg-login" value="<?= get_val("login") ?>" autocomplete="given-name">
 					<i class="fa fa-solid fa-circle-exclamation" style="color: #ff0000;"></i>
 					<span class="error-type required-error">Required</span>
 					<span class="error-type invalid-error">Login is not valid!</span>
@@ -72,7 +69,7 @@ if ($formValid) {
 
 				<div class="field <?= $ERRORS["password"] ?>">
 					<label for="reg-password">Password</label>
-					<input type="password" name="password" id="reg-password" value="<?= get_val("password") ?>">
+					<input type="password" name="password" id="reg-password" value="<?= get_val("password") ?>" autocomplete="new-password">
 					<i class="fa fa-solid fa-circle-exclamation" style="color: #ff0000;"></i>
 					<span class="error-type required-error">Required</span>
 					<span class="error-type invalid-error">Password is not valid!</span>
@@ -80,7 +77,7 @@ if ($formValid) {
 
 				<div class="field <?= $ERRORS["confirm-password"] ?>">
 					<label for="reg-confirm-password">Confirm password</label>
-					<input type="password" name="confirm-password" id="reg-confirm-password" value="<?= get_val("confirm-password") ?>">
+					<input type="password" name="confirm-password" id="reg-confirm-password" value="<?= get_val("confirm-password") ?>" autocomplete="new-password">
 					<i class="fa fa-solid fa-circle-exclamation" style="color: #ff0000;"></i>
 					<span class="error-type required-error">Required</span>
 					<span class="error-type invalid-error">Your password do not matched!</span>
@@ -88,7 +85,7 @@ if ($formValid) {
 
 				<div class="field <?= $ERRORS["email"] ?>">
 					<label for="reg-email">Email</label>
-					<input type="email" name="email" id="reg-email" value="<?= get_val("email") ?>">
+					<input type="email" name="email" id="reg-email" value="<?= get_val("email") ?>" autocomplete="email">
 					<i class="fa fa-solid fa-circle-exclamation" style="color: #ff0000;"></i>
 					<span class="error-type required-error">Required</span>
 					<span class="error-type invalid-error">Email must be in the format username@example.com</span>
@@ -122,7 +119,7 @@ if ($formValid) {
 			</div>
 		</section>
 	<?php } else { ?>
-		<section class="registration-success">
+		<section class="success-block">
 			<h1>Success</h1>
 			<a href="index.php" class="btn primary-btn black">Go home</a>
 		</section>
