@@ -1,10 +1,12 @@
+@import url('forms.css');
 @import url('pages/main.css');
 @import url('pages/about.css');
-@import url('pages/registration.css');
+@import url('pages/menu.css');
 
 :root {
   --black-color: #000000;
   --white-color: #ffffff;
+  --graywhite-color: #f7f7f7;
   --gray-color-1: #292d32;
   --gray-color-2: #e3e3e3;
   --main-font: 'Roboto', sans-serif;
@@ -126,6 +128,7 @@ header {
   position: fixed;
   height: var(--navbar-height);
   z-index: 10;
+  border-bottom: 1px solid var(--gray-color-2);
 }
 
 header > a {
@@ -141,7 +144,7 @@ header > a {
   gap: 1rem;
 }
 
-.navbar ul {
+.navbar .menu ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -149,18 +152,18 @@ header > a {
   margin-right: 1rem;
 }
 
-.navbar ul > li {
+.navbar .menu ul > li {
   list-style: none;
 }
 
-.navbar ul a {
+.navbar .menu ul a {
   text-decoration: none;
   color: var(--black-color);
   padding: 0.625rem;
   position: relative;
 }
 
-.navbar ul a::before {
+.navbar .menu ul a::before {
   content: '';
   display: block;
   position: absolute;
@@ -171,11 +174,63 @@ header > a {
   transition: width 300ms ease;
 }
 
-.navbar ul a:hover::before {
+.navbar .menu ul a:hover::before {
   width: 100%;
 }
 
+.navbar .fa-circle-user {
+  font-size: 2.5rem;
+  --fa-primary-color: #a6a6a6;
+  --fa-secondary-color: #c7c7c7;
+}
+
+.navbar .dropdown-body {
+  position: absolute;
+  right: 0;
+  transform: translateX(calc(-50% + 1.5rem));
+  visibility: hidden;
+  opacity: 0;
+  padding-top: 10px;
+}
+
+.navbar .dropdown-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+  margin: 0;
+  border: 1px solid var(--black-color);
+  background-color: var(--white-color);
+}
+
+.navbar .dropdown-body ul > li {
+  padding: 10px;
+}
+
+.navbar .dropdown-body ul > li:hover {
+  background-color: var(--gray-color-2);
+  cursor: pointer;
+}
+
+.navbar .dropdown-body a {
+  text-decoration: none;
+  color: var(--black-color);
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar .dropdown:hover > .dropdown-body,
+.navbar .dropdown-body:hover {
+  visibility: visible;
+  opacity: 1;
+}
+
 input,
+textarea,
 .btn {
   padding: 0.5rem 1.25rem;
   border-radius: 5px;
@@ -188,7 +243,12 @@ input,
   line-height: 150%;
 }
 
+textarea {
+  resize: none;
+}
+
 a.btn {
+  display: inline-block;
   text-decoration: none;
 }
 
@@ -196,7 +256,8 @@ a.btn {
   position: relative;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: var(--black-color);
   font-family: var(--main-font);
   font-size: 1rem;
@@ -411,7 +472,7 @@ footer .information {
 /* Scroll bar */
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -420,7 +481,7 @@ footer .information {
 
 ::-webkit-scrollbar-thumb {
   background: #c1c1c1;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

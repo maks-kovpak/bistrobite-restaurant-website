@@ -5,5 +5,9 @@ const PAGE_TITLES = [
 	"about" => "About Us | BistroBite",
 	"registration" => "Registration | BistroBite",
 	"login" => "Login | BistroBite",
-	"logout" => "Logout | BistroBite"
+	"logout" => "Logout | BistroBite",
+	"create-dish" => "Create a new dish | BistroBite",
+	"menu" => "Our special dishes | BistroBite"
 ];
+
+const UPLOADS_DIR = "uploads/";

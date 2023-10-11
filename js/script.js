@@ -42,3 +42,17 @@ document.addEventListener('readystatechange', function () {
     loader.style.display = 'none';
   }
 });
+
+// TODO: other file
+// Image preview
+
+const fileInput = document.getElementById('dish-image');
+const img = document.querySelector('.upload-image > img');
+
+fileInput?.addEventListener('change', () => {
+  const [file] = fileInput.files;
+
+  if (file) {
+    img.src = URL.createObjectURL(file);
+  }
+});

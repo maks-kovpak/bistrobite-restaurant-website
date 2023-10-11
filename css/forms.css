@@ -1,25 +1,25 @@
-.registration-section {
+.form-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 5rem;
 }
 
-.registration-section > * {
+.form-section > * {
   flex: 1 1 0;
 }
 
-.registration-section .section-image img {
+.form-section .section-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.registration-section .form > h2 {
+.form-section .form > h2 {
   margin: 0;
 }
 
-.registration-section .form > p {
+.form-section .form > p {
   margin-bottom: 1.5rem;
 }
 
@@ -50,7 +50,8 @@
   display: block;
 }
 
-.form .error input {
+.form .error input,
+.form .error textarea {
   border-color: red;
 }
 
@@ -62,7 +63,7 @@
   display: block;
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 35px;
   transform: translateY(6px);
   cursor: pointer;
 }
@@ -126,11 +127,11 @@
 }
 
 @media screen and (max-width: 992px) {
-  .registration-section {
+  .form-section {
     flex-direction: column;
   }
 
-  .registration-section > * {
+  .form-section > * {
     width: 100%;
   }
 }

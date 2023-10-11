@@ -1,6 +1,4 @@
-<?php
-
-require_once("vendor/autoload.php");
+<?php require_once("vendor/autoload.php");
 
 // Load environment variables
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);

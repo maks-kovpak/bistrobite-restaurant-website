@@ -56,7 +56,22 @@
 			</form>
 
 			<?php if (isset($_SESSION["user-login"])) { ?>
-				<a class="btn primary-btn black" href="index.php?action=logout">Log out</a>
+				<div class="dropdown">
+					<div class="dropdown-button">
+						<i class="fa fa-duotone fa-circle-user"></i>
+					</div>
+
+					<div class="dropdown-body">
+						<ul>
+							<li>
+								<a href="index.php?action=create-dish"><?= $_SESSION["is-admin"] ? "Create" : "Propose" ?> a new dish</a>
+							</li>
+							<li>
+								<a href="index.php?action=logout" style="color: red;">Log out</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			<?php } else { ?>
 				<a class="btn primary-btn black" href="index.php?action=login">Log in</a>
 			<?php } ?>

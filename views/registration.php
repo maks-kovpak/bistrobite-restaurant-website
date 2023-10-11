@@ -1,16 +1,4 @@
-<?php
-
-function has_error($inputName, $regex, $errorType = "invalid") {
-	if (!isset($_POST[$inputName])) {
-		return "unset";
-	} else if ($_POST[$inputName] == "") {
-		return "error required";
-	} else if (!preg_match($regex, $_POST[$inputName])) {
-		return "error " . $errorType;
-	}
-
-	return "";
-}
+<?php require_once("validation-utils.php");
 
 // Error for the second input
 function error_if($firstInput, $secondInput, $errorType = "invalid", $predicate = null) {
@@ -35,10 +23,6 @@ $ERRORS = [
 	"captcha" => error_if("captcha-value-encoded", "captcha", "invalid", fn ($val1, $val2) => base64_decode($val1) != $val2),
 ];
 
-function get_val($inputName) {
-	return isset($_POST[$inputName]) ? $_POST[$inputName] : "";
-}
-
 $formValid = !in_array(true, array_map(fn ($item) => str_starts_with($item, "error") || $item == "unset", $ERRORS));
 
 // Add to the database
@@ -49,13 +33,20 @@ if ($formValid) {
 		"password" => password_hash(get_val("password"), PASSWORD_BCRYPT),
 		"email" => get_val("email")
 	]);
+
+	$currentUser = $db->find("email = '" . get_val("email") . "'")[0];
+
+	$_SESSION["user-id"] = $currentUser["id"];
+	$_SESSION["user-email"] = $currentUser["email"];
+	$_SESSION["user-login"] = $currentUser["login"];
+	$_SESSION["is-admin"] = $currentUser["admin"];
 }
 
 ?>
 
 <main>
 	<?php if (!$formValid) { ?>
-		<section class="registration-section">
+		<section class="form-section">
 			<form class="form" action="" method="POST" novalidate>
 				<h2>Registration</h2>
 

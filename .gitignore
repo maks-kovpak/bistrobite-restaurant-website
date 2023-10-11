@@ -1,2 +1,8 @@
+# Composer libraries files
 vendor/
+
+# Environment variables
 # .env
+
+# Uploaded images
+uploads/

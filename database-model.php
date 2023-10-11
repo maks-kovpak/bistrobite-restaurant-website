@@ -38,6 +38,29 @@ class DatabaseModel {
 	}
 
 	/**
+	 * The query function executes a SQL query and returns the result set or a boolean value indicating
+	 * success or failure.
+	 * 
+	 * @param string $sql_query A string that represents the SQL query that you want to execute. 
+	 * It can be any valid SQL statement, such as SELECT, INSERT, UPDATE, DELETE, etc.
+	 * 
+	 * @return mysqli_result | bool either a mysqli_result object or a boolean value.
+	 */
+	public function query(string $sql_query): mysqli_result | bool {
+		return $this->db->query($sql_query);
+
+		try {
+			if ($this->current_table == '') {
+				throw new Exception("The table is not specified! Please open some database table to work with");
+			}
+
+			return $this->db->query($sql_query);
+		} catch (Exception $e) {
+			echo "Caught exception: ",  $e->getMessage(), "\n";
+		}
+	}
+
+	/**
 	 * The function retrieves specified fields from the current table in a database and returns the
 	 * results as an associative array.
 	 * 
@@ -48,16 +71,8 @@ class DatabaseModel {
 	 * values are the corresponding values from the database table.
 	 */
 	public function get(string ...$fields): array {
-		try {
-			if ($this->current_table == '') {
-				throw new Exception("The table is not specified! Please open some database table to work with");
-			}
-
-			$result = $this->db->query("SELECT " . join(", ", $fields) . " FROM {$this->props['name']}.{$this->current_table}");
-			return $result->fetch_all(MYSQLI_ASSOC);
-		} catch (Exception $e) {
-			echo "Caught exception: ",  $e->getMessage(), "\n";
-		}
+		$result = $this->query("SELECT " . join(", ", $fields) . " FROM {$this->props['name']}.{$this->current_table}");
+		return $result->fetch_all(MYSQLI_ASSOC);
 	}
 
 	/**
@@ -71,16 +86,8 @@ class DatabaseModel {
 	 * @return array An array of rows from the database table that match the given condition.
 	 */
 	public function find(string $condition): array {
-		try {
-			if ($this->current_table == '') {
-				throw new Exception("The table is not specified! Please open some database table to work with");
-			}
-
-			$result = $this->db->query("SELECT * FROM {$this->props['name']}.{$this->current_table} WHERE {$condition}");
-			return $result->fetch_all(MYSQLI_ASSOC);
-		} catch (Exception $e) {
-			echo "Caught exception: ",  $e->getMessage(), "\n";
-		}
+		$result = $this->query("SELECT * FROM {$this->props['name']}.{$this->current_table} WHERE {$condition}");
+		return $result->fetch_all(MYSQLI_ASSOC);
 	}
 
 	/**
@@ -91,18 +98,10 @@ class DatabaseModel {
 	 * represent the corresponding values to be inserted into those columns.
 	 */
 	public function create(array $record): void {
-		try {
-			if ($this->current_table == '') {
-				throw new Exception("The table is not specified! Please open some database table to work with");
-			}
+		$columns = join(", ", array_keys($record));
+		$values = join(", ", array_map(fn ($item) => "'{$item}'", array_values($record)));
 
-			$columns = join(", ", array_keys($record));
-			$values = join(", ", array_map(fn ($item) => "'{$item}'", array_values($record)));
-
-			$this->db->query("INSERT INTO {$this->current_table} ({$columns}) VALUES ({$values});");
-		} catch (Exception $e) {
-			echo "Caught exception: ",  $e->getMessage(), "\n";
-		}
+		$this->query("INSERT INTO {$this->current_table} ({$columns}) VALUES ({$values});");
 	}
 
 	/**

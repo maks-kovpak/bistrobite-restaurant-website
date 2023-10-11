@@ -8,19 +8,17 @@ function verify($user) {
 	return isset($_POST["password"]) ? password_verify($_POST["password"], $user["password"]) : false;
 }
 
-if (isset($_POST["login"])) {
-	$result = $db->find("login = '{$_POST['login']}'");
+if (isset($_POST["email"])) {
+	$result = $db->find("email = '{$_POST['email']}'")[0];
 
-	foreach ($result as $record) {
-		if (verify($record)) {
-			$foundUser = $record;
-			break;
-		}
+	if (verify($result)) {
+		$foundUser = $result;
 	}
 }
 
 if (!is_null($foundUser)) {
 	$_SESSION["user-id"] = $foundUser["id"];
+	$_SESSION["user-email"] = $foundUser["email"];
 	$_SESSION["user-login"] = $foundUser["login"];
 	$_SESSION["is-admin"] = $foundUser["admin"];
 }
@@ -29,7 +27,7 @@ if (!is_null($foundUser)) {
 
 <main>
 	<?php if (is_null($foundUser)) { ?>
-		<section class="registration-section">
+		<section class="form-section">
 			<div class="section-image">
 				<img src="img/login-page-cover.jpg" alt="Registration">
 			</div>
@@ -39,8 +37,8 @@ if (!is_null($foundUser)) {
 				<p>Or <a href="index.php?action=registration">sign up</a> if you do not have an account</p>
 
 				<div class="field">
-					<label for="login">Login</label>
-					<input type="text" name="login" id="login" value="">
+					<label for="email">Email</label>
+					<input type="text" name="email" id="email" value="">
 				</div>
 
 				<div class="field">
@@ -48,8 +46,8 @@ if (!is_null($foundUser)) {
 					<input type="password" name="password" id="password" value="">
 				</div>
 
-				<?php if (isset($_POST["login"]) && isset($_POST["password"])) { ?>
-					<strong style="color: red">Login or password is not valid!</strong>
+				<?php if (isset($_POST["email"]) && isset($_POST["password"])) { ?>
+					<strong style="color: red">Email or password is not valid!</strong>
 				<?php } ?>
 
 				<button class="btn primary-btn black" type="submit">Log In</button>
