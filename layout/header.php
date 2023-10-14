@@ -22,6 +22,7 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" integrity="sha256-5uKiXEwbaQh9cgd2/5Vp6WmMnsUr3VZZw0a8rKnOKNU=" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/components/modal.css">
 </head>
 
 <body style="overflow: hidden;">
@@ -51,7 +52,7 @@
 			</nav>
 
 			<form class="search-container" method="post">
-				<input type="search" placeholder="Search">
+				<input type="search" placeholder="Search" name="search-query">
 				<button type="submit"></button>
 			</form>
 

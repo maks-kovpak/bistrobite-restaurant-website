@@ -2,7 +2,7 @@
 	<div class="newsletter">
 		<div class="newsletter-info">
 			<div class="content-block">
-				<h3>Subscribe to our newsletter</h3>
+				<h3 id="subscribe-title">Subscribe to our newsletter</h3>
 				<p>Get exclusive updates: join our newsletter subscription</p>
 			</div>
 
@@ -19,7 +19,7 @@
 
 		<div class="subscribe-form">
 			<form action="" method="post">
-				<input type="email" placeholder="Enter your email">
+				<input id="subscribe-email" type="email" placeholder="Enter your email" aria-labelledby="subscribe-title">
 				<button class="btn secondary-btn white" type="submit">Subscribe</button>
 			</form>
 
@@ -60,7 +60,9 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" integrity="sha256-FZsW7H2V5X9TGinSjjwYJ419Xka27I8XPDmWryGlWtw=" crossorigin="anonymous"></script>
 <script src="js/script.js"></script>
+<script src="js/menu.js" type="module"></script>
 <script src="js/captcha.js" type="module"></script>
+<script src="js/components/modal.js" type="module"></script>
 </body>
 
 </html>

@@ -47,8 +47,6 @@ class DatabaseModel {
 	 * @return mysqli_result | bool either a mysqli_result object or a boolean value.
 	 */
 	public function query(string $sql_query): mysqli_result | bool {
-		return $this->db->query($sql_query);
-
 		try {
 			if ($this->current_table == '') {
 				throw new Exception("The table is not specified! Please open some database table to work with");
@@ -99,7 +97,7 @@ class DatabaseModel {
 	 */
 	public function create(array $record): void {
 		$columns = join(", ", array_keys($record));
-		$values = join(", ", array_map(fn ($item) => "'{$item}'", array_values($record)));
+		$values = join(", ", array_map(fn ($item) => "'{$this->db->escape_string($item)}'", array_values($record)));
 
 		$this->query("INSERT INTO {$this->current_table} ({$columns}) VALUES ({$values});");
 	}
@@ -110,5 +108,13 @@ class DatabaseModel {
 	 */
 	public function all(): array {
 		return $this->get("*");
+	}
+
+	/**
+	 * The number of rows in a database table.
+	 * @return int The number of rows.
+	 */
+	public function count(): int {
+		return $this->get('COUNT(*)')[0];
 	}
 }

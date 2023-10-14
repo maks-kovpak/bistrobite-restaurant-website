@@ -41,3 +41,17 @@ export class Random {
     return Math.random() * (max - min) + min;
   }
 }
+
+/**
+ * Scroll the window to bring a specified element into view with an optional offset.
+ *
+ * @param {HTMLElement} element - The element that you want to scroll into view.
+ *
+ * @param {number} offset - The offset parameter is a number that represents the additional
+ * distance (in pixels) from the top of the element to scroll to. It allows you to scroll
+ * to a position that is slightly above or below the element's top position.
+ */
+export function scrollIntoView(element, offset) {
+  const y = element.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}

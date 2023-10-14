@@ -9,6 +9,12 @@
   --graywhite-color: #f7f7f7;
   --gray-color-1: #292d32;
   --gray-color-2: #e3e3e3;
+
+  --red-color: #e3242b;
+  --dark-red-color: #d0312d;
+  --yellow-color: #fbb917;
+  --dark-yellow-color: #fbb117;
+
   --main-font: 'Roboto', sans-serif;
   --navbar-height: 90px;
 }
@@ -47,6 +53,11 @@ h2 {
 
 section {
   padding: 4rem;
+}
+
+.section-text.center {
+  text-align: center;
+  padding: 2rem 0 6rem;
 }
 
 .fa,
@@ -204,6 +215,8 @@ header > a {
   margin: 0;
   border: 1px solid var(--black-color);
   background-color: var(--white-color);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .navbar .dropdown-body ul > li {
@@ -473,6 +486,7 @@ footer .information {
 
 ::-webkit-scrollbar {
   width: 8px;
+  position: absolute;
 }
 
 ::-webkit-scrollbar-track {
@@ -551,19 +565,9 @@ footer .information {
     opacity: 1;
   }
 
-  .search-container input[type='search'] {
+  .search-container,
+  .search-container > * {
     display: none;
-  }
-
-  .search-container > button {
-    position: static;
-    transform: none;
-  }
-
-  .search-container {
-    display: flex;
-    justify-self: center;
-    align-items: center;
   }
 }
 
@@ -610,6 +614,7 @@ footer .information {
 
   .subscribe-form form > * {
     flex-grow: 1;
+    text-align: left;
   }
 
   section {

@@ -43,16 +43,8 @@ document.addEventListener('readystatechange', function () {
   }
 });
 
-// TODO: other file
-// Image preview
-
-const fileInput = document.getElementById('dish-image');
-const img = document.querySelector('.upload-image > img');
-
-fileInput?.addEventListener('change', () => {
-  const [file] = fileInput.files;
-
-  if (file) {
-    img.src = URL.createObjectURL(file);
-  }
+// Searching
+document.querySelector('.search-container').addEventListener('submit', (e) => {
+  e.preventDefault();
+  window.location.href = `index.php?action=search&q=${e.target.elements['search-query'].value}`;
 });

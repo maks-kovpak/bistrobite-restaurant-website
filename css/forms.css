@@ -55,6 +55,10 @@
   border-color: red;
 }
 
+.field.error input[type='number'] {
+  padding-right: 35px;
+}
+
 .form .field .fa-circle-exclamation {
   display: none;
 }
