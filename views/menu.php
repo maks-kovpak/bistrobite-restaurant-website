@@ -1,32 +1,23 @@
 <?php
 
-$limit = '';
-$paginateBy = 6;
-
-if (isset($_GET["page"])) {
-	$page = (int) $_GET["page"];
-
-	if ($page < 1) {
-		$page = 1;
-		$_GET["page"] = 1;
-	}
-
-	$offset = $paginateBy * ($page - 1);
-	$limit = "LIMIT {$paginateBy} OFFSET {$offset}";
-}
-
-
 $db->use_table("menu");
 
-$dishes = isset($_SESSION["is-admin"]) && $_SESSION["is-admin"]
+$isAdmin = isset($_SESSION["is-admin"]) && $_SESSION["is-admin"];
+$paginateBy = 6;
+
+$count = $isAdmin ? $db->count() : $db->count("published = 1");
+$maxPages = ceil($count / $paginateBy);
+
+$page = isset($_GET["page"]) ? (int) $_GET["page"] : 1;
+$page = min(max(1, $page), $maxPages);
+$_GET["page"] = $page;
+
+$offset = $paginateBy * ($page - 1);
+$limit = "LIMIT {$paginateBy} OFFSET {$offset}";
+
+$dishes = $isAdmin
 	? $db->query("SELECT * FROM menu ORDER BY date DESC {$limit}")
 	: $db->query("SELECT * FROM menu WHERE published = 1 ORDER BY date DESC {$limit}");
-
-$count = isset($_SESSION["is-admin"]) && $_SESSION["is-admin"]
-	? (int) $db->query("SELECT COUNT(*) FROM menu")->fetch_array()[0]
-	: (int) $db->query("SELECT COUNT(*) FROM menu WHERE published = 1")->fetch_array()[0];
-
-$count = ceil($count / $paginateBy);
 
 ?>
 
@@ -43,7 +34,7 @@ $count = ceil($count / $paginateBy);
 				<div class="card <?= !$dish['published'] ? 'not-published' : '' ?>" title="Created: <?= date_create($dish["date"])->format("d.m.Y") ?>">
 					<?php if (isset($_SESSION["is-admin"]) && $_SESSION["is-admin"]) { ?>
 						<div class="admin-buttons">
-							<a class="btn edit-button" href="index.php?action=edit-dish" title="Edit">
+							<a class="btn edit-button" href="index.php?action=edit-dish&id=<?= $dish['id'] ?>" title="Edit">
 								<i class="fa fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
 							</a>
 							<button class="btn delete-button" title="Delete" data-id="<?= $dish['id'] ?>" data-modal-target="confirm-delete-modal" data-click-mode="open">
@@ -65,7 +56,7 @@ $count = ceil($count / $paginateBy);
 						</div>
 
 						<div class="card-footer">
-							<a href="" class="btn secondary-btn black">Order Now</a>
+							<a href="index.php?action=view-dish&id=<?= $dish['id'] ?>" class="btn secondary-btn black">View</a>
 							<strong>$<?= $dish["price"] ?></strong>
 						</div>
 					</div>
@@ -78,8 +69,8 @@ $count = ceil($count / $paginateBy);
 				<i class="fa fa-solid fa-angle-left"></i>
 			</button>
 
-			<?php for ($i = 1; $i <= $count; $i++) { ?>
-				<button class="page <?= $i == 1 ? 'current-page' : '' ?>" data-page-number="<?= $i ?>"><?= $i ?></button>
+			<?php for ($i = 1; $i <= $maxPages; $i++) { ?>
+				<button class="page <?= $i == $_GET['page'] ? 'current-page' : '' ?>" data-page-number="<?= $i ?>"><?= $i ?></button>
 			<?php } ?>
 
 			<button class="next-page">
@@ -91,7 +82,7 @@ $count = ceil($count / $paginateBy);
 
 <div class="modal" id="confirm-delete-modal">
 	<div class="modal-content">
-		<h3>Are you sure to delete this record?</h3>
+		<h3>Are you sure you want to delete this record?</h3>
 
 		<div class="buttons">
 			<button class="modal-button btn primary-btn black" data-click-mode="close">No</button>

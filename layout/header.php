@@ -6,8 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>
-		<?php include "constants.php";
-		echo PAGE_TITLES[isset($_GET["action"]) ? $_GET["action"] : "main"]; ?>
+		<?= PAGE_TITLES[isset($_GET["action"]) ? $_GET["action"] : "main"] ?>
 	</title>
 	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 

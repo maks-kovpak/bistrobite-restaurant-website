@@ -16,6 +16,8 @@
   --dark-yellow-color: #fbb117;
 
   --main-font: 'Roboto', sans-serif;
+  --font-awesome: 'Font Awesome 5 Free';
+  --font-awesome-brands: 'Font Awesome 5 Brands';
   --navbar-height: 90px;
 }
 
@@ -62,12 +64,12 @@ section {
 
 .fa,
 .fa::before {
-  font-family: 'Font Awesome 5 Free';
+  font-family: var(--font-awesome);
 }
 
 .fa-brands,
 .fa-brands::before {
-  font-family: 'Font Awesome 5 Brands';
+  font-family: var(--font-awesome-brands);
 }
 
 /* Loader */
@@ -215,7 +217,7 @@ header > a {
   margin: 0;
   border: 1px solid var(--black-color);
   background-color: var(--white-color);
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
 }
 

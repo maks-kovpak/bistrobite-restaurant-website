@@ -36,6 +36,39 @@
   position: relative;
 }
 
+.field.checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--black-color);
+  padding: 0;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+input[type='checkbox']:checked {
+  background-color: var(--black-color);
+}
+
+input[type='checkbox']::before {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--white-color);
+  font-size: 12px;
+}
+input[type='checkbox']:checked::before {
+  display: block;
+}
+
 .form .error-type {
   text-align: right;
   color: red;
@@ -104,9 +137,9 @@
   background: var(--white-color);
 }
 
-/* Success Block */
+/* Info Block */
 
-.success-block {
+.info-block {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -99,7 +99,25 @@ class DatabaseModel {
 		$columns = join(", ", array_keys($record));
 		$values = join(", ", array_map(fn ($item) => "'{$this->db->escape_string($item)}'", array_values($record)));
 
-		$this->query("INSERT INTO {$this->current_table} ({$columns}) VALUES ({$values});");
+		$this->query("INSERT INTO {$this->props['name']}.{$this->current_table} ({$columns}) VALUES ({$values});");
+	}
+
+	/**
+	 * The function updates a record in a database table using the provided ID and record data.
+	 * 
+	 * @param int $id The unique identifier of the record that needs to be updated in the database.
+	 * @param array $record An array that contains the updated values for the record that 
+	 * needs to be updated in the database. The keys of the array represent the column names,
+	 * and the values represent the new values for those columns.
+	 */
+	public function update(int $id, array $record): void {
+		$values = join(", ", array_map(
+			fn ($k, $v) => "{$k} = '{$this->db->escape_string($v)}'",
+			array_keys($record),
+			array_values($record)
+		));
+
+		$this->query("UPDATE {$this->props['name']}.{$this->current_table} SET {$values} WHERE id = {$id};");
 	}
 
 	/**
@@ -111,10 +129,15 @@ class DatabaseModel {
 	}
 
 	/**
-	 * The number of rows in a database table.
-	 * @return int The number of rows.
+	 * Get the number of rows in a database table that satisfy a given condition.
+	 * 
+	 * @param string $condition A string that represents the condition to be used in the SQL query. 
+	 * It is optional and can be left empty. If provided, it will be appended to the SQL query using the "WHERE" keyword.
+	 * 
+	 * @return int The count of rows from the specified table in the database that match the given condition.
 	 */
-	public function count(): int {
-		return $this->get('COUNT(*)')[0];
+	public function count(string $condition = ""): int {
+		$result = $this->query("SELECT COUNT(*) FROM {$this->props['name']}.{$this->current_table} " . ($condition != "" ? "WHERE {$condition}" : ""));
+		return $result->fetch_row()[0];
 	}
 }

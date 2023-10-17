@@ -1,7 +1,6 @@
 <?php
 
 require_once("validation-utils.php");
-require_once("constants.php");
 
 $isValid = has_error("name") == "" && has_error("price") == "" && has_error("description") == "";
 $isImageUploaded = false;
@@ -38,7 +37,7 @@ if ($isValid && $isImageUploaded) {
 
 <main>
 	<?php if (!$isValid || !$isImageUploaded) { ?>
-		<section class="create-dish-section">
+		<section class="dish-form-section create-section">
 			<form class="form" action="" method="POST" enctype="multipart/form-data" novalidate>
 				<h2>Add a new dish</h2>
 
@@ -63,7 +62,7 @@ if ($isValid && $isImageUploaded) {
 							<span class="error-type required-error">Required</span>
 						</div>
 
-						<div class="field <?= has_error("description") ?>">
+						<div class="field textarea <?= has_error("description") ?>">
 							<label for="dish-description">Description</label>
 							<textarea name="description" id="dish-description"><?= get_val("description") ?></textarea>
 							<i class="fa fa-solid fa-circle-exclamation" style="color: #ff0000;"></i>
@@ -76,7 +75,7 @@ if ($isValid && $isImageUploaded) {
 			</form>
 		</section>
 	<?php } else { ?>
-		<section class="success-block">
+		<section class="info-block">
 			<h1>Success!</h1>
 			<div class="buttons">
 				<a href="index.php" class="btn primary-btn black">Go home</a>

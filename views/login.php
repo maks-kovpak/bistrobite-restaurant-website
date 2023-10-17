@@ -54,7 +54,7 @@ if (!is_null($foundUser)) {
 			</form>
 		</section>
 	<?php } else { ?>
-		<section class="success-block">
+		<section class="info-block">
 			<h1>Success!</h1>
 			<a href="index.php" class="btn primary-btn black">Go home</a>
 		</section>

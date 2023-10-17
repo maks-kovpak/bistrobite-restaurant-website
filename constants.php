@@ -8,7 +8,9 @@ const PAGE_TITLES = [
 	"logout" => "Logout | BistroBite",
 	"create-dish" => "Create a new dish | BistroBite",
 	"menu" => "Our special dishes | BistroBite",
-	"search" => "Search results"
+	"search" => "Search results",
+	"view-dish" => "View dish | BistroBite",
+	"edit-dish" => "Edit dish | BistroBite"
 ];
 
 const UPLOADS_DIR = "uploads/";
