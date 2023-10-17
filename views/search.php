@@ -3,7 +3,7 @@
 $db->use_table("menu");
 
 $search_query = $_GET["q"];
-$condition = $_SESSION["is-admin"] ? "" : "AND published = 1";
+$condition = ActiveUser::isAdmin() ? "" : "AND published = 1";
 
 $dishes = $db->query("SELECT * from menu WHERE (name LIKE '%{$search_query}%' OR description LIKE '%{$search_query}%') {$condition} ORDER BY date DESC");
 
@@ -24,7 +24,7 @@ $dishes = $db->query("SELECT * from menu WHERE (name LIKE '%{$search_query}%' OR
 			<div class="cards-container">
 				<?php foreach ($dishes as $dish) { ?>
 					<div class="card <?= !$dish['published'] ? 'not-published' : '' ?>" title="Created: <?= date_create($dish["date"])->format("d.m.Y") ?>">
-						<?php if (isset($_SESSION["is-admin"]) && $_SESSION["is-admin"]) { ?>
+						<?php if (ActiveUser::isAdmin()) { ?>
 							<div class="admin-buttons">
 								<a class="btn edit-button" href="index.php?action=edit-dish" title="Edit">
 									<i class="fa fa-solid fa-pen-to-square" style="color: #ffffff;"></i>

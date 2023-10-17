@@ -2,7 +2,7 @@
 
 $db->use_table("menu");
 
-$isAdmin = isset($_SESSION["is-admin"]) && $_SESSION["is-admin"];
+$isAdmin = ActiveUser::isAdmin();
 $paginateBy = 6;
 
 $count = $isAdmin ? $db->count() : $db->count("published = 1");
@@ -32,7 +32,7 @@ $dishes = $isAdmin
 			<?php foreach ($dishes as $i => $dish) { ?>
 				<?php if ($i > $paginateBy - 1) break; ?>
 				<div class="card <?= !$dish['published'] ? 'not-published' : '' ?>" title="Created: <?= date_create($dish["date"])->format("d.m.Y") ?>">
-					<?php if (isset($_SESSION["is-admin"]) && $_SESSION["is-admin"]) { ?>
+					<?php if ($isAdmin) { ?>
 						<div class="admin-buttons">
 							<a class="btn edit-button" href="index.php?action=edit-dish&id=<?= $dish['id'] ?>" title="Edit">
 								<i class="fa fa-solid fa-pen-to-square" style="color: #ffffff;"></i>

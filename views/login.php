@@ -17,10 +17,12 @@ if (isset($_POST["email"])) {
 }
 
 if (!is_null($foundUser)) {
-	$_SESSION["user-id"] = $foundUser["id"];
-	$_SESSION["user-email"] = $foundUser["email"];
-	$_SESSION["user-login"] = $foundUser["login"];
-	$_SESSION["is-admin"] = $foundUser["admin"];
+	ActiveUser::init(
+		(int) $foundUser["id"],
+		$foundUser["email"],
+		$foundUser["login"],
+		(bool) $foundUser["admin"]
+	);
 }
 
 ?>

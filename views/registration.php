@@ -1,4 +1,4 @@
-<?php require_once("validation-utils.php");
+<?php require_once("src/validation-utils.php");
 
 // Error for the second input
 function error_if($firstInput, $secondInput, $errorType = "invalid", $predicate = null) {
@@ -36,10 +36,12 @@ if ($formValid) {
 
 	$currentUser = $db->find("email = '" . get_val("email") . "'")[0];
 
-	$_SESSION["user-id"] = $currentUser["id"];
-	$_SESSION["user-email"] = $currentUser["email"];
-	$_SESSION["user-login"] = $currentUser["login"];
-	$_SESSION["is-admin"] = $currentUser["admin"];
+	ActiveUser::init(
+		(int) $currentUser["id"],
+		$currentUser["email"],
+		$currentUser["login"],
+		(bool) $currentUser["admin"]
+	);
 }
 
 ?>

@@ -1,6 +1,7 @@
 <?php
 
 require_once("vendor/autoload.php");
+require_once("src/active-user.php");
 require_once("constants.php");
 
 // Load environment variables
@@ -8,7 +9,7 @@ $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->load();
 
 // Create database model instance
-require_once("database-model.php");
+require_once("src/database-model.php");
 $db = new DatabaseModel();
 
 // Start new session

@@ -55,7 +55,7 @@
 				<button type="submit"></button>
 			</form>
 
-			<?php if (isset($_SESSION["user-login"])) { ?>
+			<?php if (ActiveUser::getLogin()) { ?>
 				<div class="dropdown">
 					<div class="dropdown-button">
 						<i class="fa fa-duotone fa-circle-user"></i>
@@ -64,7 +64,7 @@
 					<div class="dropdown-body">
 						<ul>
 							<li>
-								<a href="index.php?action=create-dish"><?= $_SESSION["is-admin"] ? "Create" : "Propose" ?> a new dish</a>
+								<a href="index.php?action=create-dish"><?= ActiveUser::isAdmin() ? "Create" : "Propose" ?> a new dish</a>
 							</li>
 							<li>
 								<a href="index.php?action=logout" style="color: red;">Log out</a>

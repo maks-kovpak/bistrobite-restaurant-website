@@ -507,10 +507,6 @@ footer .information {
 /* Media Queries */
 
 @media screen and (max-width: 1100px) {
-  header a.btn.primary-btn {
-    display: none;
-  }
-
   .hamburger-icon {
     display: block;
   }

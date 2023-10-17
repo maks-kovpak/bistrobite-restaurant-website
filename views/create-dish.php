@@ -1,6 +1,6 @@
 <?php
 
-require_once("validation-utils.php");
+require_once("src/validation-utils.php");
 
 $isValid = has_error("name") == "" && has_error("price") == "" && has_error("description") == "";
 $isImageUploaded = false;
@@ -15,8 +15,8 @@ if ($isValid && $isImageUploaded) {
 
 	$db->use_table("menu");
 	$db->create([
-		"published" => $_SESSION["is-admin"],
-		"author" => $_SESSION["user-id"],
+		"published" => ActiveUser::isAdmin() ? "1" : "0",
+		"author" => ActiveUser::getID(),
 		"name" => get_val("name"),
 		"description" => get_val("description"),
 		"price" => get_val("price"),
