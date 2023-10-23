@@ -121,6 +121,21 @@ class DatabaseModel {
 	}
 
 	/**
+	 * The function deletes a record from a database table based on the provided ID.
+	 * 
+	 * @param int $id The unique identifier of the record that needs to be deleted from the database table.
+	 * @return bool A boolean value that indicates if the record has been deleted or not 
+	 */
+	public function delete(int $id): bool {
+		if (!empty($this->find("id = {$id}"))) {
+			$this->query("DELETE FROM {$this->props['name']}.{$this->current_table} WHERE id = {$id};");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Get all records from a database table.
 	 * @return array All the data from the database table.
 	 */

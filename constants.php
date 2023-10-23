@@ -10,7 +10,8 @@ const PAGE_TITLES = [
 	"menu" => "Our special dishes | BistroBite",
 	"search" => "Search results",
 	"view-dish" => "View dish | BistroBite",
-	"edit-dish" => "Edit dish | BistroBite"
+	"edit-dish" => "Edit dish | BistroBite",
+	"delete-dish" => "Delete dish | BistroBite"
 ];
 
 const UPLOADS_DIR = "uploads/";

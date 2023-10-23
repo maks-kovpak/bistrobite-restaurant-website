@@ -56,8 +56,12 @@ if ($isValid) {
 ?>
 
 <main>
-	<?php if (!$isValid) { ?>
-		<!-- TODO -->
+	<?php if (!ActiveUser::isAdmin()) { ?>
+		<section class="info-block">
+			<h1>Page was not found...</h1>
+			<a href="index.php" class="btn primary-btn black">Go home</a>
+		</section>
+	<?php } else if (!$isValid) { ?>
 		<section class="dish-form-section edit-section">
 			<form class="form" action="" method="POST" enctype="multipart/form-data" novalidate>
 				<h2>Edit the dish</h2>
