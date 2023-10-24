@@ -1,4 +1,8 @@
 {
+  "name": "bistrobite/restaurant-website",
+  "description": "BistroBite Restaurant Website",
+  "type": "project",
+  "license": "MIT",
   "require": {
     "vlucas/phpdotenv": "^5.5"
   }
