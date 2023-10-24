@@ -1,17 +1,17 @@
 # BistroBite Restaurant Website
 
-Welcome to the BistroBite Restaurant Website repository! This project is a PHP-based website for a fictitious restaurant, BistroBite. The website showcases the restaurant's menu, allows customers to make reservations, and provides general information about the establishment.
+Welcome to the BistroBite Restaurant Website repository! This project is a PHP-based website for a fictitious restaurant, BistroBite. The website showcases the restaurant's menu, allows customers to register in the system, and provides general information about the establishment.
 
 ## Table of Contents
 
 - [Features](#features)
-- [Usage](#usage)s
+- [Usage](#usage)
 - [License](#license)
 
 ## Features
 
 - **Menu Display**: Browse through our delicious menu items.
-- **Registration System**: Create an account for your better experience on our website.
+- **Registration and Authentication System**: Create an account for your better experience on our website.
 - **Contact Information**: Find our contact details and location.
 - **About Us**: Learn more about BistroBite and our team.
 - **Admin Panel**: Manage menu items and website content (admin access).

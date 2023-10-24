@@ -8,6 +8,8 @@ require_once("constants.php");
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->load();
 
+$dotenv->required(["DB_HOST", "DB_PORT", "DB_USER", "DB_PASSWORD", "DB_NAME"]);
+
 // Create database model instance
 require_once("src/database-model.php");
 $db = new DatabaseModel();
