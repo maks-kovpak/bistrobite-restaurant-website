@@ -3,7 +3,7 @@
 $db->use_table('menu');
 $success = false;
 
-if (isset($_GET["id"])) {
+if (ActiveUser::isAdmin() && isset($_GET["id"])) {
 	$id = (int) $_GET["id"];
 	$success = $db->delete($id);
 }
@@ -11,7 +11,7 @@ if (isset($_GET["id"])) {
 ?>
 
 <main>
-	<?php if (ActiveUser::isAdmin() && $success) { ?>
+	<?php if ($success) { ?>
 		<section class="info-block">
 			<h1>The record has been successfully deleted!</h1>
 			<div class="buttons">
