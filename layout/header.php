@@ -46,7 +46,6 @@
 					<li><a href="index.php">Home</a></li>
 					<li><a href="index.php?action=about">About Us</a></li>
 					<li><a href="index.php?action=menu">Menu</a></li>
-					<li><a href="index.php?action=contact-us">Contact Us</a></li>
 				</ul>
 			</nav>
 

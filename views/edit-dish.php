@@ -28,6 +28,8 @@ if (isset($_FILES["image"])) {
 	$isImageUploaded = $_FILES["image"]["error"] == UPLOAD_ERR_OK;
 }
 
+$success = false;
+
 if ($isValid) {
 	$name = $dish['image_path'];
 
@@ -44,7 +46,7 @@ if ($isValid) {
 		$res = copy($tmpName, $name);
 	}
 
-	$db->update($dish["id"], [
+	$success = $db->update($dish["id"], [
 		"published" => isset($_POST["published"]) ? "1" : "0",
 		"name" => get_val("name"),
 		"description" => get_val("description"),
@@ -56,7 +58,7 @@ if ($isValid) {
 ?>
 
 <main>
-	<?php if (!ActiveUser::isAdmin()) { ?>
+	<?php if (!ActiveUser::isAdmin() || !$success) { ?>
 		<section class="info-block">
 			<h1>Page was not found...</h1>
 			<a href="index.php" class="btn primary-btn black">Go home</a>

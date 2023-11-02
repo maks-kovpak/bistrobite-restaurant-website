@@ -109,15 +109,23 @@ class DatabaseModel {
 	 * @param array $record An array that contains the updated values for the record that 
 	 * needs to be updated in the database. The keys of the array represent the column names,
 	 * and the values represent the new values for those columns.
+	 * @return bool A boolean value that indicates if the record has been updated or not 
 	 */
-	public function update(int $id, array $record): void {
-		$values = join(", ", array_map(
-			fn ($k, $v) => "{$k} = '{$this->db->escape_string($v)}'",
-			array_keys($record),
-			array_values($record)
-		));
+	public function update(int $id, array $record): bool {
+		if (empty($this->find("id = {$id}"))) {
 
-		$this->query("UPDATE {$this->props['name']}.{$this->current_table} SET {$values} WHERE id = {$id};");
+			$values = join(", ", array_map(
+				fn ($k, $v) => "{$k} = '{$this->db->escape_string($v)}'",
+				array_keys($record),
+				array_values($record)
+			));
+
+			$this->query("UPDATE {$this->props['name']}.{$this->current_table} SET {$values} WHERE id = {$id};");
+
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
